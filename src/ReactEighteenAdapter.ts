@@ -7,6 +7,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import TestUtils from 'react-dom/test-utils';
 import has from 'has';
+import enableEffects from './enableEffects';
 import {
 	ConcurrentMode,
 	ContextConsumer,
@@ -543,6 +544,8 @@ class ReactEighteenAdapter extends EnzymeAdapter {
 	createShallowRenderer(options = {}) {
 		const adapter = this;
 		const renderer = new ShallowRenderer();
+
+		enableEffects(renderer);
 		// @ts-expect-error
 		const { suspenseFallback } = options;
 		if (typeof suspenseFallback !== 'undefined' && typeof suspenseFallback !== 'boolean') {
